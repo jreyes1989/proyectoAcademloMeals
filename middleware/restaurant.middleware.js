@@ -4,6 +4,7 @@ const AppError = require('../utils/appError');
 
 exports.existRestaurant = catchAsync(async (req, res, next) => {
   const { id, restaurantId } = req.params;
+
   const restaurant = await Restaurant.findOne({
     where: {
       status: true,

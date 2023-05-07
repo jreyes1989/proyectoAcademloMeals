@@ -42,3 +42,19 @@ exports.loginValidation = [
     .withMessage('Password must be at least 9 characters long'),
   validFields,
 ];
+
+exports.CreateMealValidation = [
+  body('name').notEmpty().withMessage('Name cannot be empty'),
+  body('price')
+    .notEmpty()
+    .withMessage('The price is required')
+    .isNumeric()
+    .withMessage('The price must be a number'),
+  validFields,
+];
+
+exports.CreateRestaurantValidation = [
+  body('name').notEmpty().withMessage('Name cannot be empty'),
+  body('address').notEmpty().withMessage('Address cannot be empty'),
+  validFields,
+];

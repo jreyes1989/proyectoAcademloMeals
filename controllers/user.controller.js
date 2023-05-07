@@ -70,6 +70,7 @@ exports.loginUser = catchAsync(async (req, res, next) => {
 
 exports.updateUsers = catchAsync(async (req, res) => {
   const { user } = req;
+
   const { name, email } = await req.body;
 
   await user.update({

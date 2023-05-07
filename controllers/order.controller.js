@@ -3,11 +3,10 @@ const Order = require('../models/order.model');
 
 exports.create = catchAsync(async (req, res, next) => {
   const { quantity, mealId } = req.body;
-  const { sessionUser } = req;
 
   await Order.create({
     quantity,
-    mealId, // sessionUser.id
+    mealId,
   });
 
   //Calcular el precio para el usuario,

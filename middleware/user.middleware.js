@@ -4,15 +4,15 @@ const AppError = require('../utils/appError');
 
 exports.existUser = catchAsync(async (req, res, next) => {
   const { id } = req.params;
-  const users = await User.findOne({
+  const user = await User.findOne({
     where: {
       status: true,
       id,
     },
   });
 
-  if (!users) return next(new AppError(`User with id: ${id} not found`, 404));
+  if (!user) return next(new AppError(`User with id: ${id} not found`, 404));
 
-  req.users = users;
+  req.user = user;
   next();
 });

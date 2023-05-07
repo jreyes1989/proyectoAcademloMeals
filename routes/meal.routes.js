@@ -6,6 +6,8 @@ const mealController = require('../controllers/meal.controller');
 // middleware
 const mealMiddleware = require('./../middleware/meal.middleware');
 const authMiddleware = require('./../middleware/auth.middleware');
+const restaurantMiddleware = require('./../middleware/restaurant.middleware');
+const validationMiddleware = require('./../middleware/validations.middleware');
 
 const router = express.Router();
 
@@ -13,10 +15,11 @@ router.get('/', mealController.findAll);
 
 router
   .route('/:id')
-  .get(mealController.findOne)
+  .get(mealMiddleware.existMeal, mealController.findOne)
   .post(
-    mealMiddleware.existMeal,
+    restaurantMiddleware.existRestaurant, // modificado
     authMiddleware.protect,
+    validationMiddleware.CreateMealValidation,
     authMiddleware.restrictTo('admin'),
     mealController.create
   )

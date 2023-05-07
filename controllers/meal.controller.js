@@ -3,10 +3,12 @@ const Meal = require('../models/meal.model');
 
 exports.create = catchAsync(async (req, res, next) => {
   const { name, price } = req.body;
-
+  const { id: restaurantId } = req.params;
+  console.log('llego');
   await Meal.create({
     name,
     price,
+    restaurantId: Number(restaurantId),
   });
 
   return res.status(201).json({

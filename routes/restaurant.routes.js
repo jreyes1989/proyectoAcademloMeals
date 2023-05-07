@@ -8,6 +8,7 @@ const reviewController = require('./../controllers/review.controller');
 const authMiddleware = require('../middleware/auth.middleware');
 const restaurantMiddleware = require('./../middleware/restaurant.middleware');
 const reviewMiddleware = require('./../middleware/review.middleware');
+const validationMiddleware = require('./../middleware/validations.middleware');
 
 const router = express.Router();
 
@@ -16,6 +17,7 @@ router
   .get(restaurantController.findAll)
   .post(
     authMiddleware.protect,
+    validationMiddleware.CreateRestaurantValidation,
     authMiddleware.restrictTo('admin'),
     restaurantController.create
   );
