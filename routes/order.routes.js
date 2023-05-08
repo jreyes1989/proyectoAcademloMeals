@@ -12,13 +12,24 @@ const router = express.Router();
 
 router.use(authMiddleware.protect);
 
-router.post('/', mealMiddleware.existMeal, orderController.create);
+router.post(
+  '/',
+  mealMiddleware.existMeal,
+  authMiddleware.protectAccountOwner,
+  orderController.create
+);
 
-router.get('/me', orderController.findOne);
+router.get(
+  '/me',
+  orderMiddleware.existOrder,
+  mealMiddleware.existMeal,
+  authMiddleware.protectAccountOwner,
+  orderController.findOne
+);
 
 router
   .route('/:id')
-  .patch(authMiddleware.protectAccountOwner, orderController.update)
-  .delete(authMiddleware.protectAccountOwner, orderController.delete);
+  .patch(orderMiddleware.existOrder, orderController.update)
+  .delete(orderMiddleware.existOrder, orderController.delete);
 
 module.exports = router;

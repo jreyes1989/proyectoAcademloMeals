@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const hpp = require('hpp');
 const rateLimit = require('express-rate-limit');
 const xss = require('xss-clean');
+const os = require('os');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/error.controller');
@@ -33,6 +34,7 @@ app.use(express.json());
 app.use(cors());
 app.use(xss());
 app.use(hpp());
+console.log(os.userInfo());
 
 app.use('/api/v1', limiter);
 

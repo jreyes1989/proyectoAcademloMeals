@@ -100,7 +100,7 @@ exports.deleteUsers = catchAsync(async (req, res) => {
 exports.findAllOrder = catchAsync(async (req, res) => {
   const order = await Order.findAll({
     where: {
-      status: true,
+      status: 'active',
     },
   });
 

@@ -17,11 +17,11 @@ exports.existMeal = catchAsync(async (req, res, next) => {
       },
     ],
   });
-  console.log('si llega');
+
   if (!meal) {
     return next(new AppError(`Meal with id: ${id} not found`, 404));
   }
-  console.log('llego2');
+
   req.meal = meal;
 
   next();
