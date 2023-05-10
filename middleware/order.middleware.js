@@ -6,7 +6,6 @@ const Restaurant = require('../models/restaurant.model');
 
 exports.existOrder = catchAsync(async (req, res, next) => {
   const { id } = req.params;
-  console.log('entra1');
   const order = await Order.findOne({
     where: {
       id,

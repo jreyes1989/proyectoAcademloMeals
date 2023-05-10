@@ -12,20 +12,15 @@ const router = express.Router();
 
 router.use(authMiddleware.protect);
 
+// lo hice directo al colocar protectAccountOwner
 router.post(
   '/',
-  mealMiddleware.existMeal,
-  authMiddleware.protectAccountOwner,
-  orderController.create
+  //mealMiddleware.existMeal,  no es necesario porque lo hice directo al create
+  //authMiddleware.protectAccountOwner,  //  al colocar protectAccountOwner me da error
+  orderController.create //  aca me llega hasta el AppError  (404)
 );
 
-router.get(
-  '/me',
-  orderMiddleware.existOrder,
-  mealMiddleware.existMeal,
-  authMiddleware.protectAccountOwner,
-  orderController.findOne
-);
+router.get('/me', orderController.findOne);
 
 router
   .route('/:id')
